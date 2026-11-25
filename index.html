@@ -57,10 +57,10 @@
         <div class="showcase" aria-hidden="true">
           <img class="showcase__halo" src="assets/halo.svg" alt="">
           <div class="phone phone--left">
-            <img src="assets/inicio.png" alt="">
+            <img src="assets/alumno-1.png" alt="">
           </div>
           <div class="phone phone--right">
-            <img src="assets/ejercicio.png" alt="">
+            <img src="assets/alumno-2.png" alt="">
           </div>
         </div>
       </div>
@@ -217,6 +217,71 @@
             <div class="photo-review__dates"><span>Registro · 1 oct</span><span>Registro · 14 oct</span></div>
             <p class="footnote">Fotos compartidas solo con su entrenador. Perfiles y datos de ejemplo.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PANTALLAS DE LA APP ============ -->
+    <section class="section screens" id="pantallas">
+      <div class="container">
+        <div class="screens__head">
+          <div class="section-intro">
+            <h2 class="h2">Conocé la app</h2>
+            <p class="lead">Todo lo que necesitás para entrenar y acompañar a tus alumnos a la mano.</p>
+          </div>
+          <div class="role-toggle" role="tablist" aria-label="Ver pantallas de">
+            <button type="button" class="role-toggle__opt is-active" role="tab" id="tab-alumno" aria-selected="true" aria-controls="screens-alumno">Alumno</button>
+            <button type="button" class="role-toggle__opt" role="tab" id="tab-entrenador" aria-selected="false" aria-controls="screens-entrenador" tabindex="-1">Entrenador</button>
+          </div>
+        </div>
+
+        <div class="screens__panel" id="screens-alumno" role="tabpanel" aria-labelledby="tab-alumno">
+          <ul class="screens__track">
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/alumno-1.png" alt="Inicio del alumno con su próximo check-in y el entrenamiento en curso" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Tu día, de un vistazo</p>
+              </li>
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/alumno-2.png" alt="Pantalla de ejercicio con historial de peso y registro de la serie" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Registrá cada serie</p>
+              </li>
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/alumno-3.png" alt="Perfil del alumno con peso, altura, objetivo y nivel" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Tu perfil y objetivos</p>
+              </li>
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/alumno-4.png" alt="Beneficios con descuentos en marcas" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Beneficios exclusivos</p>
+              </li>
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/alumno-5.png" alt="Rutina del día con ejercicios, series y descansos" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Tu rutina de la semana</p>
+              </li>
+          </ul>
+        </div>
+        <div class="screens__panel" id="screens-entrenador" role="tabpanel" aria-labelledby="tab-entrenador" hidden>
+          <ul class="screens__track">
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/entrenador-1.png" alt="Inicio del entrenador con alumnos por revisar y primeros pasos" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Tu panel de inicio</p>
+              </li>
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/entrenador-2.png" alt="Detalle de un alumno con su semana de entrenamiento" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">El detalle de cada alumno</p>
+              </li>
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/entrenador-3.png" alt="Agenda con los horarios del día" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Agenda de horarios</p>
+              </li>
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/entrenador-4.png" alt="Rutina asignada con ejercicios por día" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Rutinas a medida</p>
+              </li>
+              <li class="screen">
+                <div class="screen__phone"><img src="assets/entrenador-5.png" alt="Buscador para agregar ejercicios a una rutina" width="390" height="843" loading="lazy"></div>
+                <p class="screen__caption">Biblioteca de ejercicios</p>
+              </li>
+          </ul>
         </div>
       </div>
     </section>
@@ -522,6 +587,33 @@
         });
       });
     });
+
+    // Pantallas: selector Alumno / Entrenador
+    (() => {
+      const tabs = [...document.querySelectorAll('.role-toggle__opt')];
+      const select = tab => {
+        tabs.forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          const panel = document.getElementById(t.getAttribute('aria-controls'));
+          panel.hidden = !on;
+          if (on) {
+            panel.querySelector('.screens__track').scrollLeft = 0;
+            panel.classList.remove('is-entering'); void panel.offsetWidth; panel.classList.add('is-entering');
+          }
+        });
+      };
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => select(t));
+        t.addEventListener('keydown', e => {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+          next.focus(); select(next);
+        });
+      });
+    })();
   </script>
   <script src="animations.js" defer></script>
 </body>

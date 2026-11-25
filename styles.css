@@ -799,3 +799,71 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (max-width: 640px) {
   .pricing-conditions .ai-note { padding: 14px 16px; font-size: 14px; }
 }
+
+/* =========================================================
+   PANTALLAS DE LA APP
+   ========================================================= */
+.screens .container { display: flex; flex-direction: column; gap: 48px; }
+.screens__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+.screens__head .section-intro { max-width: 640px; }
+
+.role-toggle {
+  display: inline-flex; gap: 4px; padding: 4px; flex-shrink: 0;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-pill);
+}
+.role-toggle__opt {
+  padding: 12px 24px;
+  border-radius: var(--r-pill);
+  font-weight: 600; font-size: 14px; color: var(--c-text-2);
+  transition: background-color .25s, color .25s;
+}
+.role-toggle__opt:hover { color: var(--c-text); }
+.role-toggle__opt.is-active { background: var(--c-accent); color: var(--c-bg-deep); font-weight: 700; }
+
+.screens__track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+}
+.screen { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.screen__phone {
+  width: 100%;
+  aspect-ratio: 390 / 843;
+  border: 6px solid var(--c-phone-border);
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--c-bg-deep);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, .25);
+}
+.screen__phone img { width: 100%; height: 100%; object-fit: cover; }
+.screen__caption {
+  font-family: var(--f-display); font-weight: 700; font-size: 16px;
+  text-align: center; color: var(--c-text);
+}
+
+/* Tablet y mobile: carrusel horizontal */
+@media (max-width: 1024px) {
+  .screens__head { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .screens__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--pad-x);
+    margin-inline: calc(var(--pad-x) * -1);
+    padding: 8px var(--pad-x) 24px;
+    scrollbar-width: none;
+  }
+  .screens__track::-webkit-scrollbar { display: none; }
+  .screen { flex: 0 0 220px; scroll-snap-align: start; }
+}
+@media (max-width: 640px) {
+  .screens .container { gap: 32px; }
+  .role-toggle { width: 100%; }
+  .role-toggle__opt { flex: 1; text-align: center; }
+  .screen { flex-basis: 62vw; max-width: 240px; }
+  .screen__phone { border-width: 4px; border-radius: 22px; }
+  .screen__caption { font-size: 15px; }
+}
+

@@ -112,6 +112,14 @@
   .status img { animation: dot-pulse 2.4s ease-in-out infinite; border-radius: 50%; }
   .status--warn img { animation-duration: 1.6s; }
 
+  /* ---------- Pantallas: al cambiar Alumno / Entrenador ---------- */
+  .screens__panel.is-entering .screen {
+    animation: fade-up .6s var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+  .screen__phone { transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out); }
+  .screen:hover .screen__phone { transform: translateY(-6px); box-shadow: 0 28px 56px rgba(0, 0, 0, .35); }
+
   /* ---------- Hovers ---------- */
   .benefit-card,
   .plan,

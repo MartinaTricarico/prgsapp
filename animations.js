@@ -30,6 +30,7 @@
     '.plan-free',
     '.includes__title',
     '.services__intro',
+    '.role-toggle',
     '.faq__intro .link-accent',
     '.cta-final__title',
     '.cta-final__text',
@@ -48,6 +49,7 @@
     '.footer__links',
     '.includes__grid',
     '.services__list',
+    '.screens__track',
   ];
 
   // .chart y .load__change solo necesitan la clase is-visible (su animación es propia)
